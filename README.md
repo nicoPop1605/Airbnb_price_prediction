@@ -1,15 +1,9 @@
 ## Airbnb Price Analysis & Classification (NYC)
 
 This project explores the Airbnb Open Data from New York City, moving from basic exploratory data analysis to implementing Machine Learning models that predict and classify listing prices.
+
 ## Project Overview
-
-The primary goal was to identify the key factors that drive the pricing of NYC Airbnb listings. The project evolved through several stages:
-
-    Exploratory Data Analysis (EDA): Understanding price distributions across boroughs.
-
-    Regression Modeling: Attempting to predict exact prices.
-
-    Classification Modeling: Categorizing listings into "Low", "Medium", and "High" price brackets for better predictive stability.
+This project performs an end-to-end Data Science analysis on the NYC Airbnb Open Data. The primary objective is to identify the factors that drive listing prices and to build a Machine Learning model capable of classifying rentals into price categories: Cheap, Medium, and Expensive.
 
 ## Dataset Features
 
@@ -35,33 +29,30 @@ The dataset includes diverse features used to train the models:
 
     Leakage Prevention: Removed the service fee column, as it showed a 1:1 correlation with the price.
 
-## Models & Performance
-1. Linear Regression (Baseline)
+## Machine Learning
+Algorithm: Random Forest Classifier.
 
-    Result: R2 score near 0.
+Target: Multi-class classification (Cheap, Medium, Expensive).
 
-    Insight: The relationship between features and price is highly non-linear in real-world NYC data.
+Evaluation: Used Accuracy, Precision, and Recall via a Classification Report.
 
-2. Random Forest Regressor
+Feature Importance: Extracted the most influential features, revealing that Coordinates and Construction Year drive the most value.
 
-    Result: R2 score improved to ~0.30.
+## Key insights
+Location is Granular: While general boroughs (Manhattan, Brooklyn) provide a baseline, latitude and longitude (micro-location) are much stronger predictors of price.
 
-    Insight: Ensemble methods captured complex patterns that linear models missed.
+The Service Fee Trap: Identified a 0.99 correlation between price and service fee. Removed the fee during modeling to prevent data leakage and ensure the model learns from real attributes.
 
-3. Random Forest Classifier (Final Approach)
+Market Distribution: The NYC market shows a surprisingly uniform distribution of prices, meaning there is a consistent supply of listings across all budget ranges ($50 to $1,200).
 
-    Approach: Discretized the price into 3 balanced quantiles: Low, Medium, and High.
-
-    Result: Achieved an Accuracy of 53%.
+    Result: Achieved an Accuracy of 64%.
 
     Insight: Classification proved more robust for this dataset, providing actionable insights into price "tiers".
 
-## Key Insights
+## Tech Stack
+-Language: Python 3.x
 
-Based on the Feature Importance analysis:
+-Libraries: Pandas, NumPy, Matplotlib, Seaborn, Scikit-Learn
 
-    Popularity & Activity: reviews per month and availability 365 were the strongest predictors of price categories.
+-Environment: Jupyter Notebook
 
-    Operational Rules: minimum nights significantly influenced the price tiering.
-
-    Location vs. Management: Interestingly, how a listing is managed (availability/reviews) had a higher predictive weight than its specific location in this dataset.
